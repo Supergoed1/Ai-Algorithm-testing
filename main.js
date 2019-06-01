@@ -97,7 +97,7 @@ function makeBabies() {
     generation++;
     setTimeout(() => {
         makeBabies();
-    }, 500);
+    }, 750);
 }
 
 function update() {
