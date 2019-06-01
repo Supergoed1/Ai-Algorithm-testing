@@ -69,7 +69,6 @@ function makeBabies() {
     for(var i = 0; i < subjects.length; i++) {
         var subject = subjects[i];
         subject.fitness = diff(subject.red,target.redTar) + diff(subject.green,target.greenTar) + diff(subject.blue,target.blueTar);
-        console.log("Subject " + i + ": " + subject.fitness);
     }
     //getting best subject
     best = {red: getRandomInt(0,255),
@@ -95,13 +94,19 @@ function makeBabies() {
         subject.green = best.green + getRandomInt(-10,10);
         subject.blue = best.blue + getRandomInt(-10,10);
     }
-    gen++;
+    generation++;
+    setTimeout(() => {
+        makeBabies();
+    }, 500);
 }
 
 function update() {
     document.getElementById("currentletter").innerHTML = "Current Letter: " + alphabet[num];
     document.getElementById("output").innerHTML = "Output: " + output;
     document.getElementById("gen").innerHTML = "Generation: " + generation;
+    target.redTar = hexToRgb(document.getElementById("colorPicker").value).r;
+    target.greenTar = hexToRgb(document.getElementById("colorPicker").value).g;
+    target.blueTar = hexToRgb(document.getElementById("colorPicker").value).b;
     ctx.fillStyle = 'rgb(' + best.red + ',' + best.green + ',' + best.blue + ')';
     ctx.fillRect(10, 10, 150, 80);
 }
@@ -111,6 +116,15 @@ function getRandomInt(min, max) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  }
 
 function diff(a,b){return Math.abs(a-b);}
 cycleLetters();
