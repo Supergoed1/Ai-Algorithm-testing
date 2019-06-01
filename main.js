@@ -1,6 +1,6 @@
 var text = (prompt("Enter the text")).split("");
 var output = "";
-var alphabet = (" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMOPQRSTUVWXYZ?.!1234567890'()&+=:;").split("");
+var alphabet = (" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMOPQRSTUVWXYZ?.,!1234567890'()&+=:;").split("");
 var num = 0;
 var wordindex = 0;
 var generation = 1;
